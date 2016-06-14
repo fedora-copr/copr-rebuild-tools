@@ -14,3 +14,22 @@ This repository contains tools for launching mass rebuilds of packages in [Copr]
 ## Backends
 - [ ] [PyPi](https://pypi.python.org/)
 - [ ] [Rubygems](http://rubygems.org/)
+
+
+## Configuration
+
+See [config](/config) directory for examples.
+
+
+## Usage
+
+    copr-rebuild -c <config> <backend> <action>
+
+See [configuration](#Configuration) and [backends](#Backends) sections.
+
+Examples:
+
+    copr-rebuild -c config/vagrant.ini rubygems submit --new-packages
+    copr-rebuild -c config/vagrant.ini rubygems submit --previous foo
+    copr-rebuild -c ~/config.ini pypi stats
+    copr-rebuild -c ~/config.ini pypi successful
