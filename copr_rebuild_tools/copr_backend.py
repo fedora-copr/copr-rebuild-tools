@@ -1,9 +1,7 @@
 class CoprBackend(object):
-    def submit_all(self, packages, limit=None, previous=None):
-        if previous:
-            previous = packages.index(previous)
 
-        for package in packages[previous + 1:limit]:
+    def submit_all(self, packages):
+        for package in packages:
             self.submit(package)
 
     def submit(self, package):
