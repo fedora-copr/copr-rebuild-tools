@@ -1,0 +1,2 @@
+class CoprBackend(object):
+    pass
