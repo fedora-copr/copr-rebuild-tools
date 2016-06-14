@@ -4,7 +4,7 @@ This repository contains tools for launching mass rebuilds of packages in [Copr]
 
 ## Features
 - [ ] Multiple [backends](#Backends) for various programming langues package managers
-- [ ] Submiting all packages from given backend
+- [x] Submiting all packages from given backend
     - [x] Limitable
     - [x] Possibility to specify the last submited package and continue from following one
 - [ ] Possibility to submit only new packages (or only new versions of packages)
