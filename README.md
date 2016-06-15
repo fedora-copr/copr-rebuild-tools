@@ -30,6 +30,6 @@ See [configuration](#Configuration) and [backends](#Backends) sections.
 Examples:
 
     copr-rebuild -c config/vagrant.ini rubygems submit --new-packages
-    copr-rebuild -c config/vagrant.ini rubygems submit --previous foo
+    copr-rebuild -c config/vagrant.ini rubygems submit --previous foo --limit 100
     copr-rebuild -c ~/config.ini pypi stats
     copr-rebuild -c ~/config.ini pypi successful

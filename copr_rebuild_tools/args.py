@@ -13,6 +13,7 @@ parser_stats.set_defaults(func="action_stats")
 parser_submit = subparsers.add_parser("submit", help="")
 parser_submit.set_defaults(func="action_submit")
 parser_submit.add_argument("--previous", help="")
+parser_submit.add_argument("--limit", type=int, help="")
 parser_submit.add_argument("--new-packages", action="store_true", help="")
 parser_submit.add_argument("--new-versions", action="store_true", help="")
 
