@@ -20,7 +20,8 @@ class TestQuery(unittest.TestCase):
         self.assertEqual(q.offset("baz").limit(2).get(), ["qux", "aaa"])
 
         self.assertEqual(q.limit(None).get(), objects)
-        self.assertRaises(ValueError, q.offset, ["nonexisting"])
+        self.assertEqual(q.offset(None).get(), objects)
+        self.assertEqual(q.offset("nonexisting").get(), objects)
 
 
 if __name__ == "__main__":

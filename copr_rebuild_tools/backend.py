@@ -14,8 +14,11 @@ class Query(object):
         return Query(self.objects[:n])
 
     def offset(self, obj):
-        i = self.objects.index(obj) + 1
-        return Query(self.objects[i:])
+        try:
+            i = self.objects.index(obj) + 1
+            return Query(self.objects[i:])
+        except ValueError:
+            return Query(self.objects)
 
     def get(self):
         return self.objects
