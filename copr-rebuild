@@ -1,6 +1,31 @@
 #!/usr/bin/python
 
 import backends
+from copr_rebuild_tools import config
+from copr_rebuild_tools import Query
+from copr_rebuild_tools.args import parser
+from ConfigParser import NoSectionError
 
 
-x = backends.Rubygems()
+args = conf = None
+try:
+    args = parser.parse_args()
+    conf = config.read(args.config, args.backend)
+    factory = backends.get(backends.name(args, conf))
+    backend = factory[0]()
+    copr_backend = factory[1](conf)
+
+    packages = backend.get_all()
+    query = Query(packages).offset(args.previous).limit(args.limit)
+
+    copr_backend.submit_all(query.get(), sleep=conf["sleep"])
+
+
+except NoSectionError:
+    print("No section [{}] in {} config".format(args.backend, args.config))
+
+except backends.NoSuchBackend:
+    print("No such backend: {}".format(backends.name(args, conf)))
+
+except KeyboardInterrupt:
+    pass
