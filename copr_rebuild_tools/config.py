@@ -10,4 +10,4 @@ def read(path, backend):
 
 
 def to_dict(conf, sections):
-    return dict([(s, dict(conf.items(s))) for s in sections])
+    return dict(sum([conf.items(s) for s in sections], []))
