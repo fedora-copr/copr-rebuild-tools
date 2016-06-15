@@ -13,7 +13,7 @@ This repository contains tools for launching mass rebuilds of packages in [Copr]
 
 ## Backends
 - [ ] [PyPi](https://pypi.python.org/)
-- [ ] [Rubygems](http://rubygems.org/)
+- [x] [Rubygems](http://rubygems.org/)
 
 
 ## Configuration
