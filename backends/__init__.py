@@ -6,6 +6,10 @@ backends = {
 }
 
 
+def name(args, conf):
+    return conf.get("backend", args.backend)
+
+
 def get(name):
     try:
         return backends[name]
