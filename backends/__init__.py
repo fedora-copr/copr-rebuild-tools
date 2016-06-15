@@ -1,6 +1,10 @@
 from rubygems import Rubygems, CoprRubygems
 
 
-__all__ = [
-    "Rubygems", "CoprRubygems",
-]
+backends = {
+    "rubygems": (Rubygems, CoprRubygems)
+}
+
+
+def get(name):
+    return backends[name]
