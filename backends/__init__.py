@@ -7,4 +7,11 @@ backends = {
 
 
 def get(name):
-    return backends[name]
+    try:
+        return backends[name]
+    except KeyError:
+        raise NoSuchBackend
+
+
+class NoSuchBackend(Exception):
+    pass
