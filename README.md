@@ -12,9 +12,11 @@ This repository contains tools for launching mass rebuilds of packages in [Copr]
 
 
 ## Backends
-- [x] [PyPi](https://pypi.python.org/)
-- [x] [Rubygems](http://rubygems.org/)
 
+| Name     | Key         | URL                                        |
+| -------- | ----------- | ------------------------------------------ |
+| PyPI     | `pypi`      | [pypi.python.org](https://pypi.python.org) |
+| RubyGems | `rubygems`  | [rubygems.org](http://rubygems.org)        |
 
 ## Configuration
 
