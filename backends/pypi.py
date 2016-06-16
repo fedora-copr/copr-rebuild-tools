@@ -15,5 +15,5 @@ class CoprPypi(CoprBackend):
         command = ["/usr/bin/copr-cli", "--config", self.conf["copr-config"],
                    "buildpypi", self.copr_full_name, "--packagename", package,
                    "--nowait",
-                   "--pythonversions", self.conf["python-version"]]
+                   "--pythonversions"] + self.conf["python-version"].split(" ")
         subprocess.call(command)
