@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+from __future__ import print_function
+
 import backends
 from copr_rebuild_tools import config
 from copr_rebuild_tools import Query
@@ -18,7 +20,8 @@ try:
     packages = backend.get_all()
     query = Query(packages).offset(args.previous).limit(args.limit)
 
-    copr_backend.submit_all(query.get(), sleep=conf["sleep"])
+    copr_backend.submit_all(query.get(), sleep=conf["sleep"],
+                            callback=lambda p: print("Submitting package: {}".format(p)))
 
 
 except NoSectionError:
