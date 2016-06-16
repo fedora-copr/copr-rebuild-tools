@@ -1,8 +1,10 @@
+from pypi import Pypi, CoprPypi
 from rubygems import Rubygems, CoprRubygems
 
 
 backends = {
-    "rubygems": (Rubygems, CoprRubygems)
+    "pypi": (Pypi, CoprPypi),
+    "rubygems": (Rubygems, CoprRubygems),
 }
 
 

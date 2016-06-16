@@ -3,7 +3,7 @@
 This repository contains tools for launching mass rebuilds of packages in [Copr](http://copr.fedoraproject.org/) build service.
 
 ## Features
-- [ ] Multiple [backends](#backends) for various programming langues package managers
+- [x] Multiple [backends](#backends) for various programming langues package managers
 - [x] Submiting all packages from given backend
     - [x] Limitable
     - [x] Possibility to specify the last submited package and continue from following one
@@ -12,7 +12,7 @@ This repository contains tools for launching mass rebuilds of packages in [Copr]
 
 
 ## Backends
-- [ ] [PyPi](https://pypi.python.org/)
+- [x] [PyPi](https://pypi.python.org/)
 - [x] [Rubygems](http://rubygems.org/)
 
 
