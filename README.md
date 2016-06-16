@@ -25,7 +25,7 @@ See [config](/config) directory for examples.
 
     copr-rebuild -c <config> <backend> <action>
 
-See [configuration](#configuration) and [backends](#backends) sections.
+See [configuration](#configuration) and [backends](#backends) sections. Also see `--help` for possible actions.
 
 Examples:
 
