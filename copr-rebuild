@@ -27,5 +27,8 @@ except NoSectionError:
 except backends.NoSuchBackend:
     print("No such backend: {}".format(backends.name(args, conf)))
 
+except NotImplementedError:
+    print("Backend {} is not implemented correctly".format(backends.name(args, conf)))
+
 except KeyboardInterrupt:
     pass
