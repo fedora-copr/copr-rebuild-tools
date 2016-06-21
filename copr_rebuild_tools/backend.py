@@ -1,3 +1,6 @@
+import json
+
+
 class Backend(object):
     def get_all(self):
         """
@@ -22,3 +25,6 @@ class Query(object):
 
     def get(self):
         return self.objects
+
+    def succeeded(self, packages, name_key):
+        return [json.loads(p.source_json)[name_key] for p in packages]
