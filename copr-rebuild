@@ -24,7 +24,9 @@ class Actions(object):
         pass
 
     def action_successful(self):
-        pass
+        cquery = CoprQuery(copr_backend.get_all()).successful()
+        for package in cquery.get():
+            print(package.name)
 
 
 args = conf = None
