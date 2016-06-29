@@ -28,3 +28,6 @@ class Query(object):
 
     def succeeded(self, packages, name_key):
         return [json.loads(p.source_json)[name_key] for p in packages]
+
+    def unsucessful(self, packages, name_key):
+        return Query([p for p in self.get() if p not in self.succeeded(packages, name_key)])

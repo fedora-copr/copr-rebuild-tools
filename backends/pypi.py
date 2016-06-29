@@ -11,6 +11,8 @@ class Pypi(Backend):
 
 
 class CoprPypi(CoprBackend):
+    name_attr = "pypi_package_name"
+
     def submit(self, package):
         command = ["/usr/bin/copr-cli", "--config", self.conf["copr-config"],
                    "buildpypi", self.copr_full_name, "--packagename", package,
