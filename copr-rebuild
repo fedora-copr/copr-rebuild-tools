@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 
+import datetime
 import backends
 from copr_rebuild_tools import config
 from copr_rebuild_tools import Query, CoprQuery
@@ -20,13 +21,25 @@ class Actions(object):
         copr_backend.submit_all(query.get(), sleep=conf["sleep"],
                                 callback=lambda p: print("Submitting package: {}".format(p)))
 
-    def action_stats(self):
-        pass
-
     def action_successful(self):
         cquery = CoprQuery(copr_backend.get_all()).successful()
         for package in cquery.get():
             print(package.name)
+
+    def action_stats(self):
+        cquery = CoprQuery(copr_backend.get_all())
+        packages = len(cquery.get())
+        succeeded = len(cquery.successful().get())
+
+        last_package = cquery.get()[-1]
+        last_build = last_package.client.get_build_details(last_package.latest_succeeded_build["id"])
+        last_build_time = datetime.datetime.fromtimestamp(last_build.started_on).strftime('%Y-%m-%d')
+
+        print("Project: {}".format(copr_backend.copr_full_name))
+        print("Copr config: {}".format(copr_backend.copr_config))
+        print("Total packages: {}".format(packages))
+        print("Succeeded packages: {0} ({1:.1f}%)".format(succeeded, float(succeeded) / packages * 100))
+        print("Last update: {}".format(last_build_time))
 
 
 args = conf = None
