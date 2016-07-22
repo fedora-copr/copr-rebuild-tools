@@ -7,8 +7,8 @@ class CoprBackend(object):
     def __init__(self, conf):
         self.conf = conf
         self.project = conf["project"]
-        self.owner = self.conf.get("owner", None)
-        self.copr_config = conf["copr-config"]
+        self.owner = conf.get("owner", None)
+        self.copr_config = conf.get("copr-config", None)
 
     @property
     def client(self):
