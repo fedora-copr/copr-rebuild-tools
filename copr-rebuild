@@ -6,6 +6,7 @@ import datetime
 import backends
 from copr_rebuild_tools import config
 from copr_rebuild_tools import Query, CoprQuery
+from copr_rebuild_tools.copr_backend import package_version
 from copr_rebuild_tools.args import parser
 from ConfigParser import NoSectionError
 
@@ -13,11 +14,18 @@ from ConfigParser import NoSectionError
 class Actions(object):
     def action_submit(self):
         query = Query(backend.get_all())
-        if args.new_packages:
-            packages = CoprQuery(copr_backend.get_all()).successful().get()
-            query = query.unsucessful(packages, name_key=copr_backend.name_attr)
-        query = query.offset(args.previous).limit(args.limit)
 
+        if args.new_packages or args.new_versions:
+            packages = CoprQuery(copr_backend.get_all()).successful().get()
+
+            if args.new_packages:
+                query = query.unsucessful(packages, name_key=copr_backend.name_attr)
+
+            if args.new_versions:
+                query = query.newer({package.name: package_version(package) for package in packages},
+                                    name_key=copr_backend.name_attr)
+
+        query = query.offset(args.previous).limit(args.limit)
         copr_backend.submit_all(query.get(), sleep=conf["sleep"],
                                 callback=lambda p: print("Submitting package: {}".format(p)))
 

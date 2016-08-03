@@ -46,3 +46,7 @@ class CoprQuery(object):
 
     def successful(self):
         return CoprQuery(filter(lambda x: x.latest_succeeded_build, self.objects))
+
+
+def package_version(package):
+    return package.data["latest_succeeded_build"]["pkg_version"].split("-")[0]

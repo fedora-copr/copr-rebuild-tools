@@ -1,4 +1,5 @@
 import json
+from helpers import is_greater
 
 
 class Backend(object):
@@ -31,3 +32,17 @@ class Query(object):
 
     def unsucessful(self, packages, name_key):
         return Query([p for p in self.get() if p not in self.succeeded(packages, name_key)])
+
+    def newer(self, packages, name_key):
+        """
+        :param packages: dict {pkg_name: version, ...}
+        :return:
+        """
+        # @TODO conversion between module name and package name
+        # @TODO how to get version of module?
+        rebuild = []
+        for p in self.get():
+            name = getattr(p, name_key)
+            if name not in packages or is_greater(None, packages[name]):
+                rebuild.append(p)
+        return rebuild
