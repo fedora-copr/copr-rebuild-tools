@@ -1,0 +1,5 @@
+python-barbicanclient
+python-cinderclient
+python-congressclient
+python-openstackclient
+python-ceilometerclient
