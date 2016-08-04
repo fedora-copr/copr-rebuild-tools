@@ -2,6 +2,16 @@ import json
 from helpers import is_greater
 
 
+class Entity(object):
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+    # Implemented in particular backends
+    name = NotImplemented
+    version = NotImplemented
+
+
 class Backend(object):
     def get_all(self):
         """

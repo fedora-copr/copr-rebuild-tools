@@ -1,4 +1,4 @@
-from backend import Backend, Query
+from backend import Backend, Query, Entity
 from copr_backend import CoprBackend, CoprQuery
 
 __all__ = [
@@ -6,4 +6,5 @@ __all__ = [
     "CoprBackend",
     "Query",
     "CoprQuery",
+    "Entity",
 ]

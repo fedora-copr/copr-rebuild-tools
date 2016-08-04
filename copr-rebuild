@@ -27,7 +27,7 @@ class Actions(object):
 
         query = query.offset(args.previous).limit(args.limit)
         copr_backend.submit_all(query.get(), sleep=conf["sleep"],
-                                callback=lambda p: print("Submitting package: {}".format(p)))
+                                callback=lambda p: print("Submitting package: {}".format(p.name)))
 
     def action_successful(self):
         cquery = CoprQuery(copr_backend.get_all()).successful()
