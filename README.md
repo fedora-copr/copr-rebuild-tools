@@ -19,6 +19,8 @@ This repository contains tools for launching mass rebuilds of packages in [Copr]
 | PyPI     | `pypi`      | [pypi.python.org](https://pypi.python.org) |
 | RubyGems | `rubygems`  | [rubygems.org](http://rubygems.org)        |
 
+You are welcome to write your own backend. Please see a [guide](backends/README.md) describing how to do it.
+
 ## Configuration
 
 See [config](/config) directory for examples.
