@@ -19,11 +19,10 @@ class Actions(object):
             packages = CoprQuery(copr_backend.get_all()).successful().get()
 
             if args.new_packages:
-                query = query.unsucessful(packages, name_key=copr_backend.name_attr)
+                query = query.unsucessful(packages)
 
             if args.new_versions:
-                query = query.newer({package.name: package_version(package) for package in packages},
-                                    name_key=copr_backend.name_attr)
+                query = query.newer({package.name: package_version(package) for package in packages})
 
         query = query.offset(args.previous).limit(args.limit)
         copr_backend.submit_all(query.get(), sleep=conf["sleep"],

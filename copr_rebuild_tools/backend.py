@@ -38,11 +38,12 @@ class Query(object):
     def get(self):
         return self.objects
 
-    def succeeded(self, packages, name_key):
-        return [json.loads(p.source_json)[name_key] for p in packages]
+    def succeeded(self, packages):
+        packages_set = set(p.name for p in packages)
+        return Query([e for e in self.get() if e.pkgname in packages_set])
 
-    def unsucessful(self, packages, name_key):
-        return Query([p for p in self.get() if p not in self.succeeded(packages, name_key)])
+    def unsucessful(self, packages):
+        return Query(list(set(self.get()) - set(self.succeeded(packages).get())))
 
     def newer(self, packages, name_key):
         """
