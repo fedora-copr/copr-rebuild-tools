@@ -55,3 +55,6 @@ class Query(object):
             if p.pkgname not in packages or is_greater(p.version, packages[p.pkgname]):
                 rebuild.append(p)
         return Query(rebuild)
+
+    def values(self, allowed, key):
+        return Query([e for e in self.get() if getattr(e, key) in allowed])

@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 
+import os
 import datetime
 import backends
 from copr_rebuild_tools import config
@@ -14,6 +15,10 @@ from ConfigParser import NoSectionError
 class Actions(object):
     def action_submit(self):
         query = Query(backend.get_all())
+
+        if conf["set"]:
+            with open(os.path.join(os.path.dirname(args.config), conf["set"]), "r") as f:
+                query = query.values(f.read().split("\n")[:-1], key="name")
 
         if args.new_packages or args.new_versions:
             packages = CoprQuery(copr_backend.get_all()).successful().get()
