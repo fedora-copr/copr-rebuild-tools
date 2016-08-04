@@ -38,18 +38,22 @@ required to implement `submit` method which takes an instance of `MyEntity` and 
 ## New packages
 Required for `--new-packages`
 
-@TODO Maybe not required
+You will need to implement `pkgname` property to generate proper package name according to
+[Fedora packaging guidelines](https://fedoraproject.org/wiki/Packaging:Naming?rd=Packaging:NamingGuidelines#Addon_Packages).
 
-    class CoprFoo(...):
-        name_attr = "gem_name"
-        
+    class MyEntity(...):
+        @property
+        def pkgname(self):
+            pass
+
         ...
-
 
 ## Version comparison
 Required for `--new-versions`
+Depends on `--new-packages`
+
+You will need to pass entity version while its initialization or implement a property to obtaining it on the fly.
 
     class MyEntity(...):
         version = ...
-        pkgname = ...
         ...
