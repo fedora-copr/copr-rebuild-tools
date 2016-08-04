@@ -9,6 +9,7 @@ class Entity(object):
 
     # Implemented in particular backends
     name = NotImplemented
+    pkgname = NotImplemented
     version = NotImplemented
 
 
@@ -48,11 +49,8 @@ class Query(object):
         :param packages: dict {pkg_name: version, ...}
         :return:
         """
-        # @TODO conversion between module name and package name
-        # @TODO how to get version of module?
         rebuild = []
         for p in self.get():
-            name = getattr(p, name_key)
-            if name not in packages or is_greater(None, packages[name]):
+            if p.pkgname not in packages or is_greater(p.version, packages[p.pkgname]):
                 rebuild.append(p)
-        return rebuild
+        return Query(rebuild)

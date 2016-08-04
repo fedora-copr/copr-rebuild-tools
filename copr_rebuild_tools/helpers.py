@@ -1,4 +1,4 @@
-from distutils.version import StrictVersion
+from distutils.version import StrictVersion, LooseVersion
 
 
 def is_greater(a, b):
@@ -6,4 +6,7 @@ def is_greater(a, b):
     :param a: version number
     :param b: version number
     """
-    return StrictVersion(a) > StrictVersion(b)
+    try:
+        return StrictVersion(a) > StrictVersion(b)
+    except ValueError:
+        return LooseVersion(a) > LooseVersion(b)

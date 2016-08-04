@@ -3,7 +3,9 @@ from copr_rebuild_tools import Backend, CoprBackend, Entity
 
 
 class Gem(Entity):
-    pass
+    @property
+    def pkgname(self):
+        return "rubygem-{}".format(self.name)
 
 
 class Rubygems(Backend):

@@ -11,6 +11,8 @@ class TestHelpers(unittest.TestCase):
         assert is_greater("1.1.3", "1.2.3") == False
         assert is_greater("1.2", "1.2.3") == False
         assert is_greater("1.3", "1.2.3") == True
+        assert is_greater("1.2.3.4", "1.2.3.4") == False
+        assert is_greater("1.2.3.5", "1.2.3.4") == True
 
 
 if __name__ == "__main__":
