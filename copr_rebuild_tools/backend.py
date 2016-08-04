@@ -45,7 +45,7 @@ class Query(object):
     def unsucessful(self, packages):
         return Query(list(set(self.get()) - set(self.succeeded(packages).get())))
 
-    def newer(self, packages, name_key):
+    def newer(self, packages):
         """
         :param packages: dict {pkg_name: version, ...}
         :return:
