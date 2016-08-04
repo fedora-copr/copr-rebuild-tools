@@ -8,7 +8,7 @@ This repository contains tools for launching mass rebuilds of packages in [Copr]
     - [x] Limitable
     - [x] Possibility to specify the last submited package and continue from following one
 - [x] Possibility to submit only new packages (or only new versions of packages)
-- [ ] Possibility to rebuild only given set of packages
+- [x] Possibility to rebuild only given set of packages
 - [x] Statistics of success rate
 
 
