@@ -25,7 +25,7 @@ class Module(Entity):
 
     @property
     def pkgname(self):
-        return "python-{}".format(self.name)
+        return self.name if self.name.startswith("python-") else "python-{}".format(self.name)
 
 
 class Pypi(Backend):

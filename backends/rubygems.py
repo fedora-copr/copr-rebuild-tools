@@ -5,7 +5,7 @@ from copr_rebuild_tools import Backend, CoprBackend, Entity
 class Gem(Entity):
     @property
     def pkgname(self):
-        return "rubygem-{}".format(self.name)
+        return self.name if self.name.startswith("rubygem-") else "rubygem-{}".format(self.name)
 
 
 class Rubygems(Backend):
