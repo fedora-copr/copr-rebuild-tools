@@ -18,6 +18,7 @@ class Actions(object):
         query = Query(backend.get_all())
 
         if conf["set"]:
+            print("Filter: set of input packages")
             with open(os.path.join(os.path.dirname(args.config), conf["set"]), "r") as f:
                 query = query.values(f.read().split("\n")[:-1], key="name")
 
@@ -25,12 +26,23 @@ class Actions(object):
             packages = CoprQuery(copr_backend.get_all()).successful().get()
 
             if args.new_packages:
+                print("Filter: only new packages")
                 query = query.unsucessful(packages)
 
             if args.new_versions:
+                print("Filter: only new versions of packages")
                 query = query.newer({package.name: package_version(package) for package in packages})
 
+        if args.previous:
+            print("Filter: set offset to {}".format(args.previous))
+
+        if args.limit:
+            print("Filter: set limit to {}".format(args.limit))
+
         query = query.offset(args.previous).limit(args.limit)
+
+        print("------")
+
         copr_backend.submit_all(query.get(), sleep=conf["sleep"],
                                 callback=lambda p: print("Submitting package: {}".format(p.name)))
 
