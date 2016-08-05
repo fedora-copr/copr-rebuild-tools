@@ -10,6 +10,7 @@ from copr_rebuild_tools import Query, CoprQuery
 from copr_rebuild_tools.copr_backend import package_version
 from copr_rebuild_tools.args import parser
 from ConfigParser import NoSectionError
+from copr.exceptions import CoprRequestException
 
 
 class Actions(object):
@@ -72,6 +73,10 @@ except NoSectionError:
 
 except backends.NoSuchBackend:
     print("No such backend: {}".format(backends.name(args, conf)))
+
+except CoprRequestException as ex:
+    print(ex)
+    print("Copr instance might be down?")
 
 except NotImplementedError:
     print("Backend {} is not implemented correctly".format(backends.name(args, conf)))
