@@ -1,8 +1,10 @@
+from dummy import Dummy, CoprDummy
 from pypi import Pypi, CoprPypi
 from rubygems import Rubygems, CoprRubygems
 
 
 backends = {
+    "dummy": (Dummy, CoprDummy),
     "pypi": (Pypi, CoprPypi),
     "rubygems": (Rubygems, CoprRubygems),
 }

@@ -1,9 +1,5 @@
 import unittest
-from copr_rebuild_tools import CoprBackend
-
-
-class CoprDummy(CoprBackend):
-    pass
+from backends.dummy import CoprDummy
 
 
 class TestCoprBackend(unittest.TestCase):
