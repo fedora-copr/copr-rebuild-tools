@@ -1,4 +1,3 @@
-import json
 from helpers import is_greater
 from decorators import require_pkgname, require_version
 
