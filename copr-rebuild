@@ -90,8 +90,9 @@ except CoprRequestException as ex:
     print(ex)
     print("Copr instance might be down?")
 
-except NotImplementedError:
+except NotImplementedError as ex:
     print("Backend {} is not implemented correctly".format(backends.name(args, conf)))
+    print(ex)
 
 except KeyboardInterrupt:
     pass

@@ -1,5 +1,6 @@
 import json
 from helpers import is_greater
+from decorators import require_pkgname, require_version
 
 
 class Entity(object):
@@ -38,6 +39,7 @@ class Query(object):
     def get(self):
         return self.objects
 
+    @require_pkgname
     def succeeded(self, packages):
         packages_set = set(p.name for p in packages)
         return Query([e for e in self.get() if e.pkgname in packages_set])
@@ -45,6 +47,8 @@ class Query(object):
     def unsucessful(self, packages):
         return Query(list(set(self.get()) - set(self.succeeded(packages).get())))
 
+    @require_version
+    @require_pkgname
     def newer(self, packages):
         """
         :param packages: dict {pkg_name: version, ...}
