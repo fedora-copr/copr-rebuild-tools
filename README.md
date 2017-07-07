@@ -14,10 +14,11 @@ This repository contains tools for launching mass rebuilds of packages in [Copr]
 
 ## Backends
 
-| Name     | Key         | URL                                        |
-| -------- | ----------- | ------------------------------------------ |
-| PyPI     | `pypi`      | [pypi.python.org](https://pypi.python.org) |
-| RubyGems | `rubygems`  | [rubygems.org](http://rubygems.org)        |
+| Name     | Key         | URL                                                                 |
+| -------- | ----------- | ------------------------------------------------------------------- |
+| PyPI     | `pypi`      | [pypi.python.org](https://pypi.python.org)                          |
+| RubyGems | `rubygems`  | [rubygems.org](http://rubygems.org)                                 |
+| Tito     | `tito`      | [github.com/dgoodwin/tito](https://github.com/dgoodwin/tito)        |
 
 You are welcome to write your own backend. Please see a [guide](backends/README.md) describing how to do it.
 
