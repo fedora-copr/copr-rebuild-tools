@@ -20,3 +20,5 @@ parser_submit.add_argument("--new-versions", action="store_true", help="")
 parser_successful = subparsers.add_parser("successful", help="")
 parser_successful.set_defaults(func="action_successful")
 
+parser_print = subparsers.add_parser("print", help="")
+parser_print.set_defaults(func="action_print")

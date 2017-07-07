@@ -14,7 +14,7 @@ from copr.exceptions import CoprRequestException
 
 
 class Actions(object):
-    def action_submit(self):
+    def _query(self):
         query = Query(backend.get_all())
 
         if conf["set"]:
@@ -39,12 +39,16 @@ class Actions(object):
         if args.limit:
             print("Filter: set limit to {}".format(args.limit))
 
-        query = query.offset(args.previous).limit(args.limit)
-
         print("------")
+        return query.offset(args.previous).limit(args.limit)
 
-        copr_backend.submit_all(query.get(), sleep=conf["sleep"],
+    def action_submit(self):
+        copr_backend.submit_all(self._query().get(), sleep=conf["sleep"],
                                 callback=lambda p: print("Submitting package: {}".format(p.name)))
+
+    def action_print(self):
+        for entity in self._query().get():
+            print(entity.name)
 
     def action_successful(self):
         cquery = CoprQuery(copr_backend.get_all()).successful()
