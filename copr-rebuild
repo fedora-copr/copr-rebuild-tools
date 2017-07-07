@@ -77,7 +77,7 @@ try:
     conf = config.read(args.config, args.backend)
 
     factory = backends.get(backends.name(args, conf))
-    backend = factory[0]()
+    backend = factory[0](conf)
     copr_backend = factory[1](conf)
 
     actions = Actions()

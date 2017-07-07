@@ -14,6 +14,9 @@ class Entity(object):
 
 
 class Backend(object):
+    def __init__(self, conf=None):
+        self.conf = conf
+
     def get_all(self):
         """
         Implemented in particular backends
