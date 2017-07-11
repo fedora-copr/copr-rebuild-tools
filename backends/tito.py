@@ -6,6 +6,10 @@ from copr_rebuild_tools import Backend, CoprBackend, Entity
 class Package(Entity):
     path = None
 
+    @property
+    def pkgname(self):
+        return self.name
+
 
 class Tito(Backend):
 
