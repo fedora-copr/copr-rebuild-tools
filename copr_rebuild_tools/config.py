@@ -11,6 +11,7 @@ def read(path, backend):
     confd["copr-config"] = os.path.expanduser(confd["copr-config"]) if "copr-config" in confd else \
         os.path.join(os.path.expanduser("~"), ".config", "copr")
     confd["set"] = os.path.expanduser(confd["set"]) if "set" in confd else None
+    confd["scl"] = os.path.expanduser(confd["scl"]) if "scl" in confd else None
     return confd
 
 

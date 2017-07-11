@@ -34,7 +34,16 @@ class CoprBackend(object):
     def get_all(self):
         result = self.client.get_packages_list(projectname=self.project, ownername=self.owner,
                                                with_latest_succeeded_build=True)
-        return result.packages_list
+        return self._modified_packages(result.packages_list)
+
+    def _modified_packages(self, packages):
+        scl = self.conf["scl"]
+        for package in packages:
+            if scl:
+                prefix = "{}-".format(scl)
+                if package.name.startswith(prefix):
+                    package.name = package.name.replace(prefix, "", 1)
+        return packages
 
 
 class CoprQuery(object):
