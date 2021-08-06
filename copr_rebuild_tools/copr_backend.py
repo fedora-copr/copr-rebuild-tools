@@ -53,7 +53,7 @@ class CoprQuery(object):
         self.objects = objects
 
     def get(self):
-        return self.objects
+        return list(self.objects)
 
     def successful(self):
         return CoprQuery(filter(lambda x: x["builds"]["latest_succeeded"], self.objects))
