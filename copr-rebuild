@@ -15,7 +15,7 @@ from copr.exceptions import CoprRequestException
 
 class Actions(object):
     def _query(self):
-        query = Query(backend.get_all())
+        query = Query(backend.get_all()).valid()
 
         if conf["set"]:
             print("Filter: set of input packages")
