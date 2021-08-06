@@ -41,6 +41,13 @@ class Query(object):
     def get(self):
         return self.objects
 
+    def valid(self):
+        """
+        Return only objects with valid names, that can be submitted to Copr
+        For example, RubyGems gems can be named -, -A, etc.
+        """
+        return Query([x for x in self.objects if not x.name.startswith("-")])
+
     @require_pkgname
     def succeeded(self, packages):
         packages_set = set(p.name for p in packages)
