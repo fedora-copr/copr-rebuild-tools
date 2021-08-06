@@ -68,7 +68,8 @@ class Actions(object):
         print("Project: {}".format(copr_backend.copr_full_name))
         print("Copr config: {}".format(copr_backend.copr_config))
         print("Total packages: {}".format(packages))
-        print("Succeeded packages: {0} ({1:.1f}%)".format(succeeded, float(succeeded) / packages * 100))
+        print("Succeeded packages: {0} ({1:.1f}% of successfully imported packages)"
+              .format(succeeded, float(succeeded) / packages * 100))
         print("Last update: {}".format(last_build_time))
 
 
