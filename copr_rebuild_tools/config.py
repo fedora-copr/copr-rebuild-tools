@@ -1,9 +1,9 @@
 import os
-import ConfigParser
+import configparser
 
 
 def read(path, backend):
-    conf = ConfigParser.ConfigParser()
+    conf = configparser.ConfigParser()
     conf.read(path)
 
     confd = to_dict(conf, ["general", backend])

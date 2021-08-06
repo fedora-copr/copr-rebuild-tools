@@ -9,7 +9,7 @@ from copr_rebuild_tools import config
 from copr_rebuild_tools import Query, CoprQuery
 from copr_rebuild_tools.copr_backend import package_version
 from copr_rebuild_tools.args import parser
-from ConfigParser import NoSectionError
+from configparser import NoSectionError
 from copr.exceptions import CoprRequestException
 
 
