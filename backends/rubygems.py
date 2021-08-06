@@ -20,6 +20,14 @@ class Rubygems(Backend):
 
 class CoprRubygems(CoprBackend):
     def submit(self, package):
-        command = ["/usr/bin/copr-cli", "--config", self.conf["copr-config"],
-                   "buildgem", self.copr_full_name, "--gem", package.name, "--nowait", "--background"]
+        command = [
+            "/usr/bin/copr-cli",
+            "--config",
+            self.conf["copr-config"],
+            "buildgem",
+            self.copr_full_name,
+            "--gem", "'{0}'".format(package.name),
+            "--nowait",
+            "--background"
+        ]
         call(command)
