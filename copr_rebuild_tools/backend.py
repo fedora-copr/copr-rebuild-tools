@@ -1,5 +1,5 @@
-from helpers import is_greater
-from decorators import require_pkgname, require_version
+from .helpers import is_greater
+from .decorators import require_pkgname, require_version
 
 
 class Entity(object):
