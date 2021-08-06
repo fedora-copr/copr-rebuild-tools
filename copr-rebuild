@@ -57,6 +57,7 @@ class Actions(object):
 
     def action_stats(self):
         cquery = CoprQuery(copr_backend.get_all())
+        upstream = len(Query(backend.get_all()).get())
         packages = len(cquery.get())
         succeeded = len(cquery.successful().get())
 
@@ -67,9 +68,13 @@ class Actions(object):
 
         print("Project: {}".format(copr_backend.copr_full_name))
         print("Copr config: {}".format(copr_backend.copr_config))
-        print("Total packages: {}".format(packages))
-        print("Succeeded packages: {0} ({1:.1f}% of successfully imported packages)"
-              .format(succeeded, float(succeeded) / packages * 100))
+        print("Total packages in upstream: {}".format(upstream))
+        print("Total packages in Copr: {}".format(packages))
+        print("Succeeded packages: {0} ({1:.1f}% of imported, "
+              "{2:.1f}% of total upstream)".format(
+                  succeeded,
+                  float(succeeded) / packages * 100,
+                  float(succeeded) / upstream * 100))
         print("Last update: {}".format(last_build_time))
 
 
