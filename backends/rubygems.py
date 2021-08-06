@@ -14,7 +14,8 @@ class Rubygems(Backend):
         cmd = ["gem", "search"]
         proc = Popen(cmd, stdout=PIPE, stderr=PIPE)
         output, error = proc.communicate()
-        return [Gem(name=x.split()[0], version=x.split()[1][1:-1]) for x in output.split("\n")[:-1]]
+        return [Gem(name=x.split()[0], version=x.split()[1][1:-1])
+                for x in output.decode("utf-8").split("\n")[:-1]]
 
 
 class CoprRubygems(CoprBackend):
