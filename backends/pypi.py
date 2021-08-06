@@ -1,7 +1,7 @@
 import json
 import requests
 import subprocess
-import xmlrpclib
+from xmlrpc.client import ServerProxy
 from pip._vendor.packaging.version import parse
 from copr_rebuild_tools import Backend, CoprBackend, Entity
 
@@ -30,7 +30,7 @@ class Module(Entity):
 
 class Pypi(Backend):
     def get_all(self):
-        client = xmlrpclib.ServerProxy('https://pypi.python.org/pypi')
+        client = ServerProxy('https://pypi.python.org/pypi')
         modules = client.list_packages()
         return [Module(name=m) for m in modules]
 
