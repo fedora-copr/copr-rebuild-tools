@@ -1,5 +1,5 @@
-from backend import Backend, Query, Entity
-from copr_backend import CoprBackend, CoprQuery
+from .backend import Backend, Query, Entity
+from .copr_backend import CoprBackend, CoprQuery
 
 __all__ = [
     "Backend",

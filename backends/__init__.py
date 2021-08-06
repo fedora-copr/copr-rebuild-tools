@@ -1,7 +1,7 @@
-from dummy import Dummy, CoprDummy
-from pypi import Pypi, CoprPypi
-from rubygems import Rubygems, CoprRubygems
-from tito import Tito, CoprTito
+from .dummy import Dummy, CoprDummy
+from .pypi import Pypi, CoprPypi
+from .rubygems import Rubygems, CoprRubygems
+from .tito import Tito, CoprTito
 
 
 backends = {
