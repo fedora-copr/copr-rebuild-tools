@@ -1,5 +1,5 @@
 import time
-from copr import CoprClient
+from copr.v3 import Client
 
 
 class CoprBackend(object):
@@ -12,7 +12,7 @@ class CoprBackend(object):
 
     @property
     def client(self):
-        return CoprClient.create_from_file_config(self.copr_config)
+        return Client.create_from_config_file(self.copr_config)
 
     @property
     def copr_full_name(self):
@@ -32,9 +32,11 @@ class CoprBackend(object):
         raise NotImplementedError
 
     def get_all(self):
-        result = self.client.get_packages_list(projectname=self.project, ownername=self.owner,
-                                               with_latest_succeeded_build=True)
-        return self._modified_packages(result.packages_list)
+        result = self.client.package_proxy.get_list(
+            ownername=self.owner,
+            projectname=self.project,
+            with_latest_succeeded_build=True)
+        return self._modified_packages(result)
 
     def _modified_packages(self, packages):
         scl = self.conf["scl"]
@@ -54,8 +56,9 @@ class CoprQuery(object):
         return self.objects
 
     def successful(self):
-        return CoprQuery(filter(lambda x: x.latest_succeeded_build, self.objects))
+        return CoprQuery(filter(lambda x: x["builds"]["latest_succeeded"], self.objects))
 
 
 def package_version(package):
-    return package.data["latest_succeeded_build"]["pkg_version"].split("-")[0]
+    version = package["builds"]["latest_succeeded"]["source_package"]["version"]
+    return version.split("-")[0]
