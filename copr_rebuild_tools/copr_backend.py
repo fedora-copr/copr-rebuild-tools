@@ -1,5 +1,6 @@
 import time
 from copr.v3 import Client
+from copr.v3.pagination import next_page
 
 
 class CoprBackend(object):
@@ -32,11 +33,18 @@ class CoprBackend(object):
         raise NotImplementedError
 
     def get_all(self):
-        result = self.client.package_proxy.get_list(
+        packages = []
+        pagination = {"limit": 1000}
+        packages_page = self.client.package_proxy.get_list(
             ownername=self.owner,
             projectname=self.project,
-            with_latest_succeeded_build=True)
-        return self._modified_packages(result)
+            with_latest_succeeded_build=True,
+            pagination=pagination,
+        )
+        while packages_page:
+            packages.extend(packages_page)
+            packages_page = next_page(packages_page)
+        return self._modified_packages(packages)
 
     def _modified_packages(self, packages):
         scl = self.conf["scl"]
