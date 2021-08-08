@@ -43,8 +43,13 @@ class Actions(object):
         return query.offset(args.previous).limit(args.limit)
 
     def action_submit(self):
-        copr_backend.submit_all(self._query().get(), sleep=conf["sleep"],
-                                callback=lambda p: print("Submitting package: {}".format(p.name)))
+        copr_backend.submit_all(
+            self._query().get(),
+            sleep=conf["sleep"],
+            batch=conf["batch"],
+            batch_sleep=conf["batch-sleep"],
+            callback=lambda p: print("Submitting package: {}".format(p.name))
+        )
 
     def action_print(self):
         for entity in self._query().get():

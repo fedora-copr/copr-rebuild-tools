@@ -12,6 +12,10 @@ def read(path, backend):
         os.path.join(os.path.expanduser("~"), ".config", "copr")
     confd["set"] = os.path.expanduser(confd["set"]) if "set" in confd else None
     confd["scl"] = os.path.expanduser(confd["scl"]) if "scl" in confd else None
+
+    confd["batch"] = int(confd["batch"]) if "batch" in confd else None
+    confd["batch-sleep"] = int(confd["batch-sleep"]) if "batch-sleep" in confd else 0
+
     return confd
 
 

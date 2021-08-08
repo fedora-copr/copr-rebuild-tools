@@ -19,12 +19,17 @@ class CoprBackend(object):
     def copr_full_name(self):
         return "/".join(filter(None,[self.conf.get("owner", None), self.conf["project"]]))
 
-    def submit_all(self, packages, sleep=0, callback=None):
-        for package in packages:
+    def submit_all(self, packages, sleep=0, batch=None, batch_sleep=0,
+                   callback=None):
+        for i, package in enumerate(packages):
             if callback:
                 callback(package)
+
             self.submit(package)
             time.sleep(sleep)
+
+            if (i+1) % batch == 0:
+                time.sleep(batch_sleep)
 
     def submit(self, package):
         """
