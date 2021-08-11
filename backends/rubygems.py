@@ -26,7 +26,7 @@ class CoprRubygems(CoprBackend):
             self.conf["copr-config"],
             "buildgem",
             self.copr_full_name,
-            "--gem", "'{0}'".format(package.name),
+            "--gem={0}".format(package.name),
             "--nowait",
             "--background"
         ]
