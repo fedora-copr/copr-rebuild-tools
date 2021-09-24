@@ -66,7 +66,7 @@ class Actions(object):
         packages = len(cquery.get())
         succeeded = len(cquery.successful().get())
 
-        last_package = cquery.get()[-1]
+        last_package = cquery.successful().get()[-1]
         last_build = last_package["builds"]["latest_succeeded"]
         last_build_time = datetime.datetime.fromtimestamp(
             last_build["started_on"]).strftime('%Y-%m-%d')
@@ -80,7 +80,7 @@ class Actions(object):
                   succeeded,
                   float(succeeded) / packages * 100,
                   float(succeeded) / upstream * 100))
-        print("Last update: {}".format(last_build_time))
+        print("Last successful package: {}".format(last_build_time))
 
 
 args = conf = None
