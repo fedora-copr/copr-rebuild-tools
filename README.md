@@ -29,13 +29,65 @@ See [config](/config) directory for examples.
 
 ## Usage
 
-    copr-rebuild -c <config> <backend> <action>
-
 See [configuration](#configuration) and [backends](#backends) sections. Also see `--help` for possible actions.
 
-Examples:
+```
+copr-rebuild -c <config> <backend> <action>
+```
 
-    copr-rebuild -c config/vagrant.ini rubygems submit --new-packages
-    copr-rebuild -c config/vagrant.ini rubygems submit --previous foo --limit 100
-    copr-rebuild -c ~/config.ini pypi stats
-    copr-rebuild -c ~/config.ini pypi successful
+## Examples
+
+The most basic usage, build all RubyGems packages in Copr
+
+```
+copr-rebuild -c config/production.ini rubygems submit
+```
+
+To submit only such RubyGems packages that are not yet (successfully)
+built in Copr.
+
+```
+copr-rebuild -c config/production.ini rubygems submit --new-packages
+```
+
+To submit only RubyGems packages with new versions that weren't built
+in Copr yet. This includes packages that weren't built in Copr at all.
+
+```
+copr-rebuild -c config/production.ini rubygems submit --new-versions
+```
+
+In case the submitting was interrupted (network issue, etc), we don't
+have to start all over. Let's say the latest submitted package was
+`foo`. We can resume the rebuild from there.
+
+```
+copr-rebuild -c config/production.ini rubygems submit --previous foo
+```
+
+For development purposes, it is possible to limit the number of
+submitted packages.
+
+```
+copr-rebuild -c config/production.ini rubygems submit --limit 100
+```
+
+The `--previous` and `--limit` can be combined together to some sort
+of offset-limit pagination.
+
+```
+copr-rebuild -c config/production.ini rubygems submit --previous foo --limit 100
+```
+
+To print information about how many of the RubyGems packages
+succeeded, failed to import, failed to build, etc.
+
+```
+copr-rebuild -c ~/config.ini rubygems stats
+```
+
+To list all successfully built RubyGems packages in Copr.
+
+```
+copr-rebuild -c ~/config.ini rubygems successful
+```
