@@ -28,7 +28,7 @@ class CoprBackend(object):
             self.submit(package)
             time.sleep(sleep)
 
-            if (i+1) % batch == 0:
+            if batch and (i+1) % batch == 0:
                 time.sleep(batch_sleep)
 
     def submit(self, package):
