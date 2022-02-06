@@ -10,6 +10,7 @@ class CoprBackend(object):
         self.project = conf["project"]
         self.owner = conf.get("owner", None)
         self.copr_config = conf.get("copr-config", None)
+        self.chroots = conf.get("chroots", "").split()
 
     @property
     def client(self):

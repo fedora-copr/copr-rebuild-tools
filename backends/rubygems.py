@@ -30,4 +30,6 @@ class CoprRubygems(CoprBackend):
             "--nowait",
             "--background"
         ]
+        for chroot in self.chroots:
+            command.extend(["--chroot", chroot])
         call(command)
