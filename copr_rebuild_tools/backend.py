@@ -31,9 +31,10 @@ class Query(object):
     def limit(self, n):
         return Query(self.objects[:n])
 
-    def offset(self, obj):
+    def offset(self, name):
         try:
-            i = self.objects.index(obj) + 1
+            names = [x.name for x in self.objects]
+            i = names.index(name) + 1
             return Query(self.objects[i:])
         except ValueError:
             return Query(self.objects)
