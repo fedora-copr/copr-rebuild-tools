@@ -70,5 +70,8 @@ class Query(object):
                 rebuild.append(p)
         return Query(rebuild)
 
+    def order(self):
+         return Query(sorted(self.get(), key=lambda x: x.name))
+
     def values(self, allowed, key):
         return Query([e for e in self.get() if getattr(e, key) in allowed])

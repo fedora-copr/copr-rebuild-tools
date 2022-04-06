@@ -40,7 +40,7 @@ class Actions(object):
             print("Filter: set limit to {}".format(args.limit))
 
         print("------")
-        return query.offset(args.previous).limit(args.limit)
+        return query.order().offset(args.previous).limit(args.limit)
 
     def action_submit(self):
         copr_backend.submit_all(
