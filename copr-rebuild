@@ -16,6 +16,7 @@ from copr.exceptions import CoprRequestException
 class Actions(object):
     def _query(self):
         query = Query(backend.get_all()).valid()
+        chroots = self._chroots()
 
         if conf["set"]:
             print("Filter: set of input packages")
@@ -23,7 +24,7 @@ class Actions(object):
                 query = query.values(f.read().split("\n")[:-1], key="name")
 
         if args.new_packages or args.new_versions:
-            packages = CoprQuery(copr_backend.get_all()).successful().get()
+            packages = CoprQuery(copr_backend.get_all()).successful(chroots).get()
 
             if args.new_packages:
                 print("Filter: only new packages")
@@ -31,7 +32,8 @@ class Actions(object):
 
             if args.new_versions:
                 print("Filter: only new versions of packages")
-                query = query.newer({package.name: package_version(package) for package in packages})
+                query = query.newer({package.name: package_version(package, chroots)
+                                     for package in packages})
 
         if args.previous:
             print("Filter: set offset to {}".format(args.previous))
@@ -41,6 +43,18 @@ class Actions(object):
 
         print("------")
         return query.order().offset(args.previous).limit(args.limit)
+
+    def _chroots(self):
+        enabled = copr_backend.enabled_chroots
+        if not copr_backend.chroots:
+            return enabled
+
+        chroots = copr_backend.chroots
+        wrong = [x for x in chroots if x not in enabled]
+        if not wrong:
+            return chroots
+        raise RuntimeError("Chroot {0} is not enabled in the {1} project"
+                           .format(wrong[0], copr_backend.copr_full_name))
 
     def action_submit(self):
         copr_backend.submit_all(
@@ -105,6 +119,9 @@ except backends.NoSuchBackend:
 except CoprRequestException as ex:
     print(ex)
     print("Copr instance might be down?")
+
+except RuntimeError as ex:
+    print("Error: {0}".format(ex))
 
 except NotImplementedError as ex:
     print("Backend {} is not implemented correctly".format(backends.name(args, conf)))
