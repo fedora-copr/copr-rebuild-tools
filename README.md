@@ -79,6 +79,13 @@ of offset-limit pagination.
 copr-rebuild -c config/production.ini rubygems submit --previous foo --limit 100
 ```
 
+Rebuild only such packages, that was possible to build or at least
+import in another chroot.
+
+```
+copr-rebuild -c config/production.ini rubygems submit --based-on fedora-rawhide-x86_64
+```
+
 To print information about how many of the RubyGems packages
 succeeded, failed to import, failed to build, etc.
 

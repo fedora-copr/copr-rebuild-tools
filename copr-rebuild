@@ -23,9 +23,15 @@ class Actions(object):
             with open(os.path.join(os.path.dirname(args.config), conf["set"]), "r") as f:
                 query = query.values(f.read().split("\n")[:-1], key="name")
 
-        if args.new_packages or args.new_versions:
-            packages = CoprQuery(copr_backend.get_all()).successful(chroots).get()
+        if args.new_packages or args.new_versions or args.based_on:
+            packagesq = CoprQuery(copr_backend.get_all())
 
+            if args.based_on:
+                print("Filter: only packages based on {0}".format(args.based_on))
+                based_on = packagesq.successful([args.based_on]).get()
+                query = query.succeeded(based_on)
+
+            packages = packagesq.successful(chroots).get()
             if args.new_packages:
                 print("Filter: only new packages")
                 query = query.unsucessful(packages)

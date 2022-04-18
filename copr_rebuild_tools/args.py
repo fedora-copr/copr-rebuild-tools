@@ -13,7 +13,9 @@ parser_base.add_argument("--previous", help="")
 parser_base.add_argument("--limit", type=int, help="")
 parser_base.add_argument("--new-packages", action="store_true", help="")
 parser_base.add_argument("--new-versions", action="store_true", help="")
-
+parser_base.add_argument("--based-on",
+                         help=("Don't try to build any packages that are not "
+                               "successfully built in this chroot"))
 
 parser_submit = subparsers.add_parser("submit", parents=[parser_base], help="")
 parser_submit.set_defaults(func="action_submit")
